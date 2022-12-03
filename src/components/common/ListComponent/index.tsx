@@ -167,7 +167,7 @@ const ListComponent = <TList extends { id?: string }>({
         }}
       >
         <GroupPanel visible={true} />
-        <SearchPanel visible={true} highlightCaseSensitive={true} />
+        <SearchPanel visible={false} highlightCaseSensitive={false} />
         <Grouping autoExpandAll={false} />
         {selection && <Selection mode={'multiple'} allowSelectAll />}
         {columns.map((item, index) => (
@@ -179,7 +179,7 @@ const ListComponent = <TList extends { id?: string }>({
           showPageSizeSelector={true}
         />
         <Paging defaultPageSize={10} />
-        <Export enabled={true} formats={['pdf', 'xlsx']} />
+        <Export enabled={false} formats={['pdf', 'xlsx']} />
       </DataGrid>
     </Card>
   );

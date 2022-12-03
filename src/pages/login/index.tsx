@@ -15,16 +15,13 @@ export async function getStaticProps({ locale }: PageLocaleProps) {
 }
 
 const Login = ({ showToast }: PageProps) => {
-
   const handleLogin = async (
     values: IAuthLoginForm,
     setIsLoading: Dispatch<SetStateAction<boolean>>,
   ): Promise<void> => {
     setIsLoading(true);
 
-
     setIsLoading(false);
-
   };
 
   <AuthLoginForm handleLogin={handleLogin} />;
