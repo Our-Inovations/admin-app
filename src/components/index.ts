@@ -19,6 +19,5 @@ export * from './ui/Dashboard/TrafficDevice';
 export * from './ui/Dashboard/LatestProducts';
 export * from './ui/Dashboard/DashboardNavbar';
 
-
 export * from './ui/Layout';
 export * from './ui/Sidebar';

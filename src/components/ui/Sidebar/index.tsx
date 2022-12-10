@@ -60,7 +60,7 @@ const SidebarComponent = (props: Props) => {
             sx={{
               borderColor: '#2D3748',
               py: 1,
-            }} s
+            }}
           />
         </Box>
       </div>
@@ -111,7 +111,9 @@ const SidebarComponent = (props: Props) => {
           color="error"
           sx={{ mt: 2 }}
           // endIcon={<OpenInNewIcon />}
-          onClick={() => { console.log("hello") }}
+          onClick={() => {
+            console.log('hello');
+          }}
           title={'SIGN OUT'}
         />
       </Box>

@@ -10,7 +10,6 @@ import { CacheProvider } from '@emotion/react';
 import { createEmotionCache } from 'theme/utils/emotion-cache';
 import 'devextreme/dist/css/dx.material.blue.light.css';
 
-
 const clientSideEmotionCache = createEmotionCache();
 
 function App({ Component, pageProps, ...rest }: AppPropsWithLayout) {

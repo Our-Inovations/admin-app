@@ -1,11 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Container, Grid } from '@mui/material';
-import {
-  AppTotalCustomer,
-  AppTasksProgress,
-  Layout,
-} from 'components';
+import { AppTotalCustomer, AppTasksProgress, Layout } from 'components';
 // import { HEADINGS_TRANSLATION_KEYS } from 'locales';
 // import { PageLocaleProps } from 'interfaces/locales';
 
@@ -39,7 +35,6 @@ function Page() {
               <Grid item lg={3} sm={6} xl={3} xs={12}>
                 <AppTasksProgress />
               </Grid>
-              
             </Grid>
           </Container>
         </Box>
