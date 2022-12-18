@@ -10,7 +10,7 @@ type Props = {
   error?: string;
   selected: string;
   disabled?: boolean;
-  list: { id: string; name?: string }[];
+  list: { name?: string }[];
   handleChange: (
     event: SelectChangeEvent<string>,
     child: React.ReactNode,
@@ -43,8 +43,8 @@ function DropdownComponent({
           {list.map((item, index) => (
             <MenuItem
               key={index}
-              value={item.id}
-              selected={item.id === selected}
+              value={item.name}
+              selected={item.name === selected}
             >
               {item.name ?? ''}
             </MenuItem>

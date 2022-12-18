@@ -1,8 +1,10 @@
 import { Box } from '@mui/material';
+import { useRouter } from 'next/router';
 import { memo } from 'react';
 import { AppButton } from '../Button';
 
 const TopListComponent = () => {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -12,7 +14,12 @@ const TopListComponent = () => {
       }}
     >
       <h2>Bus Details</h2>
-      <AppButton title="Add Button" />
+      <AppButton
+        title="Add Bus"
+        onClick={() => {
+          router.push('bus-details/add');
+        }}
+      />
     </Box>
   );
 };

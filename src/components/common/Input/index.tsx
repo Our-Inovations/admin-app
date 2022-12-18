@@ -2,7 +2,7 @@ import { TextField, TextFieldProps } from '@mui/material';
 import { memo } from 'react';
 
 type ExtendedTextFieldProps = TextFieldProps & {
-  error: boolean;
+  error?: boolean;
   disabled?: boolean;
 };
 

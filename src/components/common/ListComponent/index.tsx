@@ -16,6 +16,7 @@ import DataGrid, {
   Export,
 } from 'devextreme-react/data-grid';
 import { APP_URL } from 'config/environments';
+import { Switch } from '@mui/material';
 
 type Props<TList> = {
   columns: {
@@ -23,32 +24,74 @@ type Props<TList> = {
     title: string;
   }[];
   url?: string;
-  content: TList[];
+  delCol?: Boolean;
+  content?: TList[];
   selection?: boolean;
   onSelection?: (list: TList[]) => void;
   customURL?: (item: string) => string;
+  handleEdit?: any;
+  setID?: any;
+  buttonCol?: boolean;
 };
-
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const ListComponent = <TList extends { id?: string }>({
   url,
   columns,
   content,
   selection,
+  buttonCol,
+  handleEdit,
   onSelection,
+  delCol,
   customURL,
+  setID,
 }: Props<TList>) => {
   const viewColumn = useMemo(
     () => (
       <Column
         dataField="action"
-        cellRender={({
-          data,
-        }: {
-          data: typeof content[number];
-        }): JSX.Element => {
+        cellRender={({ data }: { data: any }): JSX.Element => {
           if (customURL && data.id)
-            return <Link href={customURL(data.id)} text={`✏`} />;
-          return <Link href={`${url}/${data.id}`} text={`✏`} />;
+            return <Link href={customURL(data.id)} text={`View Full Detail`} />;
+          return <Link href={`${url}/${data.id}`} text={`View Full Detail`} />;
+        }}
+      />
+    ),
+    [customURL, url],
+  );
+  const delColumn = useMemo(
+    () => (
+      <Column
+        dataField="delete"
+        cellRender={({ data }: { data: any }): JSX.Element => {
+          return (
+            <p
+              onClick={() => {
+                setID(data.id);
+              }}
+            >
+              ❌{' '}
+            </p>
+          );
+        }}
+      />
+    ),
+    [customURL, url],
+  );
+  const buttonColumn = useMemo(
+    () => (
+      <Column
+        dataField="Paid / Unpaid"
+        cellRender={({ data }: { data: any }): JSX.Element => {
+          return (
+            <Switch
+              {...label}
+              checked={data.fee}
+              onChange={() => {
+                handleEdit({ ...data, fee: !data.fee }, data?.id);
+              }}
+            />
+          );
         }}
       />
     ),
@@ -173,6 +216,8 @@ const ListComponent = <TList extends { id?: string }>({
         {columns.map((item, index) => (
           <Column key={index} dataField={item.name} dataType="string" />
         ))}
+        {delCol ? delColumn : null}
+        {buttonCol ? buttonColumn : null}
         {url || customURL ? viewColumn : null}
         <Pager
           allowedPageSizes={[10, 25, 50, 100]}

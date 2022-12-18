@@ -4,7 +4,6 @@ import { NavItem } from './item';
 import { useRouter } from 'next/router';
 import { memo, useEffect } from 'react';
 import { Box, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
-import { AppButton } from 'components/common/Button';
 
 type Props = {
   onClose?: () => void;
@@ -88,34 +87,6 @@ const SidebarComponent = (props: Props) => {
             </Box>
           ),
         )}
-      </Box>
-      <Box
-        sx={{
-          px: 2,
-          py: 3,
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            mt: 2,
-            mx: 'auto',
-            width: '160px',
-            '& img': {
-              width: '100%',
-            },
-          }}
-        ></Box>
-        <AppButton
-          fullWidth
-          color="error"
-          sx={{ mt: 2 }}
-          // endIcon={<OpenInNewIcon />}
-          onClick={() => {
-            console.log('hello');
-          }}
-          title={'SIGN OUT'}
-        />
       </Box>
     </Box>
   );

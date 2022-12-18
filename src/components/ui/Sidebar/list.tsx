@@ -18,7 +18,7 @@ export const MENU = [
     title: 'DRIVER DETAILS',
   },
   {
-    href: '/studnt-details',
+    href: '/student-details',
     icon: <GroupIcon />,
     title: 'STUDENT DETAILS',
   },
@@ -26,11 +26,6 @@ export const MENU = [
     href: '/fee-management',
     icon: <GroupIcon />,
     title: 'FEE MANAGMENT',
-  },
-  {
-    href: '/register-new-student',
-    icon: <GroupIcon />,
-    title: 'REGISTER NEW STUDENT',
   },
   {
     href: '/registration-request',

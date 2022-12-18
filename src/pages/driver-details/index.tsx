@@ -2,23 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Layout } from 'components/ui/Layout';
 import { List } from 'components/common/ListComponent';
 import { Box, Grid } from '@mui/material';
-import { TopList } from 'components/common/TopListComponent';
-import { deleteBus, getBus } from 'components/config/firebase';
+import { AppButton } from 'components/index';
+import { useRouter } from 'next/router';
+import { deleteDriver, getDriver } from 'components/config/firebase';
 function Page() {
+  const router = useRouter();
   const [data, setData] = useState();
   const [id, setID] = useState();
   const Column = [
-    { name: 'bus_name', title: 'bus_name' },
-    { name: 'bus_color', title: 'bus_color' },
-    { name: 'bus_model', title: 'bus_model' },
-    { name: 'bus_Liscene', title: 'bus_Liscene' },
+    { name: 'driver_name', title: 'Driver Name' },
+    { name: 'driver_id', title: 'Driver Id:' },
+    { name: 'driver_number', title: 'Driver Number' },
+    { name: 'driver_cnic', title: 'Driver CNIC' },
   ];
+
   useEffect(() => {
-    console.log(id);
     async function dlt() {
       if (id) {
-        await deleteBus(id);
-        const res = await getBus();
+        await deleteDriver(id);
+        const res = await getDriver();
         setData(res);
       }
     }
@@ -26,7 +28,7 @@ function Page() {
   }, [id]);
   useEffect(() => {
     async function getData() {
-      const res = await getBus();
+      const res = await getDriver();
       setData(res);
       console.log(res);
     }
@@ -44,7 +46,21 @@ function Page() {
     >
       <Grid container>
         <Grid item xs={12}>
-          <TopList />
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              margin: '2rem 0rem',
+            }}
+          >
+            <h2>Driver Details</h2>
+            <AppButton
+              title="Add Driver"
+              onClick={() => {
+                router.push('driver-details/add');
+              }}
+            />
+          </Box>
         </Grid>
         <Grid item xs={12}>
           <List columns={Column} content={data} delCol={true} setID={setID} />
@@ -55,7 +71,7 @@ function Page() {
 }
 
 Page.getLayout = (page: JSX.Element) => (
-  <Layout heading={'DASHBOARD'}>{page}</Layout>
+  <Layout heading={'DRIVER DETAILS'}>{page}</Layout>
 );
 
 export default Page;
