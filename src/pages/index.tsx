@@ -27,7 +27,9 @@ function Page() {
             width: '100%',
           }}
         >
-          <Container maxWidth={false}></Container>
+          <Container sx={{ display: 'flex', justifyContent: 'center' }}>
+            <img src="images/tracking_logo.png" width={550} height={400} />
+          </Container>
         </Box>
       </DashboardLayoutRoot>
     </>

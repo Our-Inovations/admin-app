@@ -55,7 +55,7 @@ const Customer = ({ handleSubmit }: Props) => {
               )}
               content={() => componentRef.current}
             />
-            <div style={{ display: 'none' }}>
+            <div>
               <PrintComponent data={formik.values} ref={componentRef} />
             </div>
           </div>

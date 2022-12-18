@@ -5,7 +5,7 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
     <div ref={ref}>
       <div style={{ width: '400px', textAlign: 'center', margin: 'auto' }}>
         <div>
-          <p
+          {/* <p
             style={{
               fontWeight: '600',
               fontSize: '50px',
@@ -15,7 +15,8 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
           >
             {' '}
             Trax Tracking{' '}
-          </p>{' '}
+          </p>{' '} */}
+          <img src="/images/tracking_logo.png" width={200} height={150} />
         </div>
         <div>
           <p
@@ -33,7 +34,10 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
           {' '}
           <p style={{ fontWeight: '600', fontSize: '26px', marginTop: '20px' }}>
             {' '}
-            Student Name:{'   '} {props.data.student_name}{' '}
+            Student Name:{'   '}{' '}
+            <span style={{ fontWeight: '700', marginLeft: '20px' }}>
+              {props.data.student_name}
+            </span>{' '}
           </p>
         </div>
         <div>
@@ -41,7 +45,10 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
           <p style={{ fontWeight: '600', fontSize: '26px' }}>
             {' '}
             Enrollment ID: {'   '}
-            {props.data.enrollment_id}{' '}
+            <span style={{ fontWeight: '700', marginLeft: '20px' }}>
+              {' '}
+              {props.data.enrollment_id}{' '}
+            </span>
           </p>
         </div>
         <div>
@@ -49,7 +56,10 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
           <p style={{ fontWeight: '600', fontSize: '26px' }}>
             {' '}
             Address: {'   '}
-            {props.data.address}{' '}
+            <span style={{ fontWeight: '700', marginLeft: '20px' }}>
+              {' '}
+              {props.data.address}{' '}
+            </span>
           </p>
         </div>
         <div>
@@ -57,14 +67,37 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
           <p style={{ fontWeight: '600', fontSize: '26px' }}>
             {' '}
             Distance Per KM: {'   '}
-            {props.data.distance_per_km}{' '}
+            <span style={{ fontWeight: '700', marginLeft: '20px' }}>
+              {props.data.distance_per_km}{' '}
+            </span>
           </p>
         </div>
         <div>
           {' '}
           <p style={{ fontWeight: '600', fontSize: '26px' }}>
             {' '}
-            Amount Per KM: {'   '} {props.data.amount_per_km}{' '}
+            Amount Per KM: {'   '}
+            <span style={{ fontWeight: '700', marginLeft: '20px' }}>
+              {' '}
+              {props.data.amount_per_km}{' '}
+            </span>
+          </p>
+        </div>
+        <div>
+          {' '}
+          <p
+            style={{
+              fontWeight: '600',
+              fontSize: '26px',
+              marginTop: '20px',
+              borderTop: '1px solid black',
+            }}
+          >
+            {' '}
+            Total: {'   '}{' '}
+            <span style={{ fontWeight: '700', marginLeft: '20px' }}>
+              {props.data.amount_per_km * props.data.distance_per_km}{' '}
+            </span>
           </p>
         </div>
       </div>
