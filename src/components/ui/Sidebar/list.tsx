@@ -25,11 +25,11 @@ export const MENU = [
   {
     href: '/fee-management',
     icon: <GroupIcon />,
-    title: 'FEE MANAGMENT',
+    title: 'FEE MANAGEMENT',
   },
   {
     href: '/registration-request',
     icon: <GroupIcon />,
-    title: 'REGISTION REQUESTS',
+    title: 'REGISTRATION REQUESTS',
   },
 ];

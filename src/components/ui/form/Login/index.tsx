@@ -6,9 +6,10 @@ import { Card } from '../../../common/Card';
 
 import { LOGIN_FORM_SCHEMA } from 'config/schema-validators';
 import { Input } from 'components';
-import { Dispatch, memo, SetStateAction, useState } from 'react';
+import { Dispatch, memo, SetStateAction } from 'react';
 import { IAuthLoginForm } from '../../../../interfaces/forms';
-import { AppLoader } from 'components/common/AppLoader';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 type Props = {
   handleLogin: (
@@ -18,33 +19,39 @@ type Props = {
 };
 
 const AuthLoginFormComponent = ({ handleLogin }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-
+  const router = useRouter();
   const formik = useFormik<IAuthLoginForm>({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: LOGIN_FORM_SCHEMA(),
-    onSubmit: (values: IAuthLoginForm) => {
-      handleLogin(values, setIsLoading);
+    onSubmit: (values: any) => {
+      if (
+        values.email == 'master@mailinator.com' &&
+        values.password == 'master123'
+      ) {
+        console.log('in');
+        localStorage.setItem('email', JSON.stringify(values.email));
+        localStorage.setItem('password', JSON.stringify(values.password));
+        router.push('/');
+      } else {
+        alert('Enter Correct Email or password');
+      }
     },
   });
 
-  if (isLoading) {
-    return <AppLoader />;
-  }
   return (
     <>
       <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
         <Grid container justifyContent="space-around">
-          <Grid
-            item
-            xs={11}
-            md={4}
-            alignItems={'center'}
-            display={'flex'}
-          ></Grid>
+          <Grid item xs={11} md={4} alignItems={'center'} display={'flex'}>
+            <Image
+              src={'/images/tracking_logo.png'}
+              width="400px"
+              height="250px"
+            />
+          </Grid>
           <Grid item xs={11} md={4}>
             <Card
               elevation={13}
@@ -52,7 +59,7 @@ const AuthLoginFormComponent = ({ handleLogin }: Props) => {
             >
               <Box sx={{ my: 3, textAlign: 'center' }}>
                 <Typography color="textPrimary" variant="h4">
-                  {'SIGN_IN'}
+                  {'SIGN IN'}
                 </Typography>
               </Box>
               <form onSubmit={formik.handleSubmit}>
@@ -62,8 +69,8 @@ const AuthLoginFormComponent = ({ handleLogin }: Props) => {
                   label={'EMAIL'}
                   value={formik.values.email}
                   onChange={formik.handleChange}
-                  helperText={formik.errors.email}
-                  error={Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                  error={Boolean(formik.touched.email && formik.errors.email)}
                 />
                 <Input
                   name="password"
@@ -71,8 +78,10 @@ const AuthLoginFormComponent = ({ handleLogin }: Props) => {
                   label={'PASSWORD'}
                   value={formik.values.password}
                   onChange={formik.handleChange}
-                  helperText={formik.errors.password}
-                  error={Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
+                  error={Boolean(
+                    formik.touched.password && formik.errors.password,
+                  )}
                 />
                 <AppButton
                   fullWidth
