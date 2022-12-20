@@ -14,10 +14,16 @@ export const LOGIN_FORM_SCHEMA = () =>
     ),
   });
 
-export const CATEGORY_FORM_SCHEMA = () =>
+export const DRIVER_FRON_SCHEMA = () =>
   yup.object({
-    name: STRING_TYPE.required('Required Name'),
-    parent_id: STRING_TYPE.required('Required Parent Category'),
+    driver_name: STRING_TYPE.required('Required driver Name'),
+    driver_id: NUMBER_TYPE.required('Required driver ID'),
+    driver_number: NUMBER_TYPE.min(11, 'required minimun 11 number').required(
+      'Required driver number',
+    ),
+    driver_cnic: NUMBER_TYPE.min(14, 'required minimun 11 number').required(
+      'Required driver number',
+    ),
   });
 
 export const PRODUCT_FORM_SCHEMA = () =>

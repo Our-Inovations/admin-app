@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Layout } from 'components/ui/Layout';
 import { List } from 'components/common/ListComponent';
 import { Box, Grid } from '@mui/material';
-import { AppButton } from 'components/index';
-import { useRouter } from 'next/router';
 import {
   deleteStudent,
   getStudent,
   getStudentFromApp,
 } from 'components/config/firebase';
 function Page() {
-  const router = useRouter();
   const Column = [
     { name: 'student_name', title: 'Name' },
     { name: 'parent_name', title: 'Parent Name' },
@@ -57,12 +54,6 @@ function Page() {
             }}
           >
             <h2>Requested Students List</h2>
-            <AppButton
-              title="Add Student"
-              onClick={() => {
-                router.push('student-details/add');
-              }}
-            />
           </Box>
         </Grid>
         <Grid item xs={12}>

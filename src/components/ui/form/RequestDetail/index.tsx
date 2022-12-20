@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { FormEvent, memo, useEffect } from 'react';
 import { AppButton, Input } from 'components';
 import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
-import { deleteFromApp } from 'components/config/firebase';
+import { addStudent, deleteFromApp } from 'components/config/firebase';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -41,9 +41,19 @@ const Customer = ({ handleSubmit, data }: Props) => {
     formik.setFieldValue('address', data?.address);
   }, [data]);
   async function accept() {
+    const _data = {
+      student_name: data?.student_name,
+      parent_name: data?.parent_name,
+      enrollment_id: data?.enrollment_id,
+      parent_number: data?.parent_number,
+      email: data?.email ?? '',
+      address: data?.address,
+      fee: false,
+    };
+    await addStudent(_data);
     await deleteFromApp(data?.id);
+
     router.push('/registration-request');
-    alert('Accepted');
   }
   async function reject() {
     await deleteFromApp(data?.id);
@@ -146,6 +156,18 @@ const Customer = ({ handleSubmit, data }: Props) => {
                 name="address"
                 // label={'House Address'}
                 value={formik.values.address}
+                onChange={formik.handleChange}
+                helperText={formik.touched.address && formik.errors.address}
+                error={Boolean(formik.touched.address && formik.errors.address)}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              Email
+              <Input
+                disabled
+                name="email"
+                // label={'House Address'}
+                value={formik.values.email}
                 onChange={formik.handleChange}
                 helperText={formik.touched.address && formik.errors.address}
                 error={Boolean(formik.touched.address && formik.errors.address)}

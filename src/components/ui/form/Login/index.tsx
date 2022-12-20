@@ -10,6 +10,8 @@ import { Dispatch, memo, SetStateAction } from 'react';
 import { IAuthLoginForm } from '../../../../interfaces/forms';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setUserDetails } from 'redux/slices/user.slice';
 
 type Props = {
   handleLogin: (
@@ -20,6 +22,8 @@ type Props = {
 
 const AuthLoginFormComponent = ({ handleLogin }: Props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const formik = useFormik<IAuthLoginForm>({
     initialValues: {
       email: '',
@@ -31,9 +35,7 @@ const AuthLoginFormComponent = ({ handleLogin }: Props) => {
         values.email == 'master@mailinator.com' &&
         values.password == 'master123'
       ) {
-        console.log('in');
-        localStorage.setItem('email', JSON.stringify(values.email));
-        localStorage.setItem('password', JSON.stringify(values.password));
+        dispatch(setUserDetails({ isUser: true }));
         router.push('/');
       } else {
         alert('Enter Correct Email or password');

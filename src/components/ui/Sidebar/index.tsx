@@ -6,6 +6,9 @@ import { memo, useEffect } from 'react';
 import { Box, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import { AppButton } from 'components/common/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { setUserDetails } from 'redux/slices/user.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 
 type Props = {
   onClose?: () => void;
@@ -14,19 +17,27 @@ type Props = {
 
 const SidebarComponent = (props: Props) => {
   const router = useRouter();
+  const dat = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
   const { open, onClose } = props;
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false,
   });
+
+  // useEffect(() => {
+  //   const items = localStorage?.getItem('password');
+  //   if (items === 'master123') {
+  //     console.log("in")
+  //   } else {
+  //     // router.push('/login');
+  //     console.log("out")
+  //   }
+  // }, []);
   useEffect(() => {
-    const items = localStorage?.getItem('password');
-    if (items === 'master123') {
-    } else {
+    if (dat.isUser == false) {
       router.push('/login');
     }
-  }, []);
-  useEffect(() => {
     if (!router.isReady) return;
 
     if (open) {
@@ -118,8 +129,9 @@ const SidebarComponent = (props: Props) => {
           sx={{ mt: 2 }}
           endIcon={<LogoutIcon />}
           onClick={() => {
-            localStorage.setItem('email', JSON.stringify(null));
-            localStorage.setItem('password', JSON.stringify(null));
+            // localStorage.setItem('email', JSON.stringify(null));
+            // localStorage.setItem('password', JSON.stringify(null));
+            dispatch(setUserDetails({ isUser: true }));
             router.push('/login');
           }}
           title={'SIGN OUT'}

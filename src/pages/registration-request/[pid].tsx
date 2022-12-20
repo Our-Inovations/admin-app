@@ -17,6 +17,7 @@ const Page = () => {
     }
     getData();
   }, []);
+
   return (
     <Box component="main" sx={{ flexGrow: 1, py: 6 }}>
       <Box

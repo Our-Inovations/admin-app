@@ -4,6 +4,7 @@ import { Input, AppButton } from 'components';
 import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
 import { addDriver } from 'components/config/firebase';
 import { useRouter } from 'next/router';
+import { DRIVER_FRON_SCHEMA } from 'config/schema-validators';
 
 type Props = {
   handleSubmit: (e?: FormEvent<HTMLFormElement>) => void;
@@ -11,8 +12,8 @@ type Props = {
 type TData = {
   driver_name: string;
   driver_id: string;
-  driver_number: string;
-  driver_cnic: string;
+  driver_number: number;
+  driver_cnic: number;
 };
 
 const Customer = ({ handleSubmit }: Props) => {
@@ -21,9 +22,10 @@ const Customer = ({ handleSubmit }: Props) => {
     initialValues: {
       driver_name: '',
       driver_id: '',
-      driver_number: '',
-      driver_cnic: '',
+      driver_number: 0,
+      driver_cnic: 0,
     },
+    validationSchema: DRIVER_FRON_SCHEMA(),
     onSubmit: async value => {
       await addDriver(value);
       router.push('/driver-details');
@@ -71,6 +73,7 @@ const Customer = ({ handleSubmit }: Props) => {
               <Input
                 name="driver_id"
                 label={'Driver ID'}
+                type="number"
                 value={formik.values.driver_id}
                 onChange={formik.handleChange}
                 helperText={formik.touched.driver_id && formik.errors.driver_id}
@@ -84,6 +87,7 @@ const Customer = ({ handleSubmit }: Props) => {
             <Grid item md={6} xs={12}>
               <Input
                 name="driver_number"
+                type="number"
                 label={'Phone Number'}
                 value={formik.values.driver_number}
                 onChange={formik.handleChange}
@@ -99,6 +103,7 @@ const Customer = ({ handleSubmit }: Props) => {
               <Input
                 name="driver_cnic"
                 label={'CNIC Number'}
+                type="number"
                 value={formik.values.driver_cnic}
                 onChange={formik.handleChange}
                 helperText={

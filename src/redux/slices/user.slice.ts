@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
-  email: '',
-  password: '',
+  isUser: false,
 };
-
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -13,8 +11,7 @@ export const userSlice = createSlice({
       state: typeof initialState,
       action: PayloadAction<typeof initialState>,
     ) => {
-      state.email = action.payload.email;
-      state.password = action.payload.password;
+      state.isUser = action.payload.isUser;
     },
   },
 });

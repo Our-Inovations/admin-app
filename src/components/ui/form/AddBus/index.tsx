@@ -96,6 +96,7 @@ const Customer = ({ handleSubmit }: Props) => {
             <Grid item md={6} xs={12}>
               <Input
                 name="bus_Liscene"
+                type={'number'}
                 label={'Bus Liscene number'}
                 value={formik.values.bus_Liscene}
                 onChange={formik.handleChange}

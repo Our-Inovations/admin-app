@@ -1,7 +1,18 @@
 import { useFormik } from 'formik';
-import { FormEvent, memo, useEffect } from 'react';
-import { Input } from 'components';
-import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
+import { FormEvent, memo, useEffect, useState } from 'react';
+import { AppButton, Input } from 'components';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
+import { editStudent, getBus } from 'components/config/firebase';
 
 type Props = {
   handleSubmit: (e?: FormEvent<HTMLFormElement>) => void;
@@ -32,7 +43,10 @@ const Customer = ({ handleSubmit, data }: Props) => {
       bus: data?.bus,
     },
 
-    onSubmit: async value => {},
+    onSubmit: async value => {
+      await editStudent(value, data.id);
+      alert('Bus Added');
+    },
   });
   useEffect(() => {
     formik.setFieldValue('student_name', data?.student_name);
@@ -43,7 +57,27 @@ const Customer = ({ handleSubmit, data }: Props) => {
     formik.setFieldValue('address', data?.address);
     formik.setFieldValue('route', data?.route);
     formik.setFieldValue('bus', data?.bus);
+    setBus(data?.bus);
   }, [data]);
+  const [_data, setData] = useState<any>();
+  const [bus, setBus] = useState('');
+  useEffect(() => {
+    async function getData() {
+      const res = await getBus();
+      setData(res);
+    }
+    getData();
+  }, []);
+  const settData = _data?.map((item: any) => {
+    return {
+      ...item,
+      name: item?.bus_name,
+    };
+  });
+  useEffect(() => {
+    formik.setFieldValue('bus', bus);
+  }, [bus]);
+  console.log(formik.values);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -58,6 +92,7 @@ const Customer = ({ handleSubmit, data }: Props) => {
           }}
         >
           <CardHeader title={'Student Details'} />
+          <AppButton title="Save" type="submit" />
         </div>
 
         <Divider style={{ borderColor: '#E6E8F0' }} />
@@ -160,25 +195,33 @@ const Customer = ({ handleSubmit, data }: Props) => {
               Route
               <Input
                 name="route"
-                disabled
-                // label={'Email Address'}
                 value={formik.values.route}
                 onChange={formik.handleChange}
-                helperText={formik.touched.email && formik.errors.email}
-                error={Boolean(formik.touched.email && formik.errors.email)}
+                helperText={formik.touched.route && formik.errors.route}
+                error={Boolean(formik.touched.route && formik.errors.route)}
               />
             </Grid>
             <Grid item md={6} xs={12}>
-              Assigned Bus
-              <Input
-                disabled
-                name="bus"
-                // label={'House Address'}
-                value={formik.values.bus}
-                onChange={formik.handleChange}
-                helperText={formik.touched.address && formik.errors.address}
-                error={Boolean(formik.touched.address && formik.errors.address)}
-              />
+              <FormControl sx={{ marginTop: 5, minWidth: '100%' }}>
+                <InputLabel id="demo-select-small">Assigned bus</InputLabel>
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  value={bus}
+                  label="Assigned bus"
+                  onChange={e => {
+                    setBus(e.target.value);
+                  }}
+                >
+                  {settData?.map((item: any, ind: number) => {
+                    return (
+                      <MenuItem key={ind} value={item.name}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         </CardContent>
