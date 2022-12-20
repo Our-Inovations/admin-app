@@ -23,7 +23,6 @@ const SidebarComponent = (props: Props) => {
     const items = localStorage?.getItem('password');
     if (items === 'master123') {
     } else {
-      router.push('/login');
     }
   }, []);
   useEffect(() => {
