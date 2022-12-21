@@ -82,6 +82,16 @@ const AuthLoginFormComponent = ({ handleLogin }: Props) => {
                     formik.touched.password && formik.errors.password,
                   )}
                 />
+
+                <p
+                  style={{
+                    fontSize: '12px',
+                    textAlign: 'end',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Forgot Password?
+                </p>
                 <AppButton
                   fullWidth
                   type="submit"
