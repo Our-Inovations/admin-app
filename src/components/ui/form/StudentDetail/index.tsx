@@ -76,6 +76,9 @@ const Customer = ({ handleSubmit, data }: Props) => {
   });
   useEffect(() => {
     formik.setFieldValue('bus', bus);
+    const dat = _data?.find((itm: any) => itm.bus_name == bus);
+    console.log(dat?.route);
+    formik.setFieldValue('route', dat?.route);
   }, [bus]);
   console.log(formik.values);
   return (

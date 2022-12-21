@@ -1,6 +1,9 @@
 import React, { forwardRef } from 'react';
 // eslint-disable-next-line
 const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
+  const id = Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
   return (
     <div ref={ref}>
       <div
@@ -45,8 +48,8 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
               Student Challan Fee{' '}
             </p>{' '} */}
             <div>
-              <p>Challan NO : {props.data.challan_no}</p>
-              <p>Account NO : {props.data.challan_no}</p>
+              <p style={{ fontSize: '10px' }}>Challan NO : {id}</p>
+              <p style={{ fontSize: '10px' }}>Account NO : 3092308900222437</p>
             </div>
             <p>Date: {props.data.due_date} </p>
           </div>
@@ -162,8 +165,8 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
               Student Challan Fee{' '}
             </p>{' '} */}
             <div>
-              <p>Challan NO : {props.data.challan_no}</p>
-              <p>Account NO : {props.data.challan_no}</p>
+              <p style={{ fontSize: '10px' }}>Challan NO : {id}</p>
+              <p style={{ fontSize: '10px' }}>Account NO : 3092308900222437</p>
             </div>
             <p>Date: {props.data.due_date} </p>
           </div>
@@ -281,8 +284,8 @@ const PrintComponent = forwardRef((props: { data: any }, ref: any) => {
               Student Challan Fee{' '}
             </p>{' '} */}
             <div>
-              <p>Challan NO : {props.data.challan_no}</p>
-              <p>Account NO : {props.data.challan_no}</p>
+              <p style={{ fontSize: '10px' }}>Challan NO : {id}</p>
+              <p style={{ fontSize: '10px' }}>Account NO : 3092308900222437</p>
             </div>
             <p>Date: {props.data.due_date} </p>
           </div>

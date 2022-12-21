@@ -131,7 +131,7 @@ const SidebarComponent = (props: Props) => {
           onClick={() => {
             // localStorage.setItem('email', JSON.stringify(null));
             // localStorage.setItem('password', JSON.stringify(null));
-            dispatch(setUserDetails({ isUser: true }));
+            dispatch(setUserDetails({ isUser: false }));
             router.push('/login');
           }}
           title={'SIGN OUT'}

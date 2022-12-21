@@ -31,10 +31,7 @@ const AuthLoginFormComponent = ({ handleLogin }: Props) => {
     },
     validationSchema: LOGIN_FORM_SCHEMA(),
     onSubmit: (values: any) => {
-      if (
-        values.email == 'master@mailinator.com' &&
-        values.password == 'master123'
-      ) {
+      if (values.email == 'admin@gmail.com' && values.password == 'admin123') {
         dispatch(setUserDetails({ isUser: true }));
         router.push('/');
       } else {

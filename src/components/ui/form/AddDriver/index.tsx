@@ -1,8 +1,18 @@
 import { useFormik } from 'formik';
-import { FormEvent, memo } from 'react';
+import { FormEvent, memo, useEffect, useState } from 'react';
 import { Input, AppButton } from 'components';
-import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
-import { addDriver } from 'components/config/firebase';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
+import { addDriver, getBus } from 'components/config/firebase';
 import { useRouter } from 'next/router';
 import { DRIVER_FRON_SCHEMA } from 'config/schema-validators';
 
@@ -14,6 +24,7 @@ type TData = {
   driver_id: string;
   driver_number: number;
   driver_cnic: number;
+  bus: string;
 };
 
 const Customer = ({ handleSubmit }: Props) => {
@@ -24,6 +35,7 @@ const Customer = ({ handleSubmit }: Props) => {
       driver_id: '',
       driver_number: 0,
       driver_cnic: 0,
+      bus: '',
     },
     validationSchema: DRIVER_FRON_SCHEMA(),
     onSubmit: async value => {
@@ -31,6 +43,24 @@ const Customer = ({ handleSubmit }: Props) => {
       router.push('/driver-details');
     },
   });
+  const [bus, setBus] = useState('');
+  const [_data, setData] = useState<any>();
+  useEffect(() => {
+    async function getData() {
+      const res = await getBus();
+      setData(res);
+    }
+    getData();
+  }, []);
+  const settData = _data?.map((item: any) => {
+    return {
+      ...item,
+      name: item?.bus_name,
+    };
+  });
+  useEffect(() => {
+    formik.setFieldValue('bus', bus);
+  }, [bus]);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -114,6 +144,31 @@ const Customer = ({ handleSubmit }: Props) => {
                 )}
               />
             </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
+              <FormControl sx={{ marginTop: 5, minWidth: '100%' }}>
+                <InputLabel id="demo-select-small">Assigned bus</InputLabel>
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  value={bus}
+                  label="Assigned bus"
+                  onChange={e => {
+                    setBus(e.target.value);
+                  }}
+                >
+                  {settData?.map((item: any, ind: number) => {
+                    return (
+                      <MenuItem key={ind} value={item.name}>
+                        {item.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item md={6} xs={12}></Grid>
           </Grid>
         </CardContent>
       </Card>

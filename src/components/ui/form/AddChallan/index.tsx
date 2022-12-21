@@ -134,15 +134,15 @@ const Customer = ({ handleSubmit }: Props) => {
             </Grid>
             <Grid item md={6} xs={12}>
               <Input
-                name="challan_no"
-                label={'Challan No'}
-                value={formik.values.challan_no}
+                name="amount_per_km"
+                label={'Amount Per KM'}
+                value={formik.values.amount_per_km}
                 onChange={formik.handleChange}
                 helperText={
-                  formik.touched.challan_no && formik.errors.challan_no
+                  formik.touched.amount_per_km && formik.errors.amount_per_km
                 }
                 error={Boolean(
-                  formik.touched.challan_no && formik.errors.challan_no,
+                  formik.touched.amount_per_km && formik.errors.amount_per_km,
                 )}
               />
             </Grid>
@@ -176,20 +176,6 @@ const Customer = ({ handleSubmit }: Props) => {
             </Grid>
           </Grid>
           <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <Input
-                name="amount_per_km"
-                label={'Amount Per KM'}
-                value={formik.values.amount_per_km}
-                onChange={formik.handleChange}
-                helperText={
-                  formik.touched.amount_per_km && formik.errors.amount_per_km
-                }
-                error={Boolean(
-                  formik.touched.amount_per_km && formik.errors.amount_per_km,
-                )}
-              />
-            </Grid>
             <Grid item md={6} xs={12}>
               <Input
                 name="due_date"

@@ -14,6 +14,7 @@ type TData = {
   bus_model: string;
   bus_color: string;
   bus_Liscene: string;
+  route: string;
 };
 
 const Customer = ({ handleSubmit }: Props) => {
@@ -24,6 +25,7 @@ const Customer = ({ handleSubmit }: Props) => {
       bus_model: '',
       bus_color: '',
       bus_Liscene: '',
+      route: '',
     },
 
     onSubmit: async value => {
@@ -106,6 +108,18 @@ const Customer = ({ handleSubmit }: Props) => {
                 error={Boolean(
                   formik.touched.bus_Liscene && formik.errors.bus_Liscene,
                 )}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
+              <Input
+                name="route"
+                label={'Route'}
+                value={formik.values.route}
+                onChange={formik.handleChange}
+                helperText={formik.touched.route && formik.errors.route}
+                error={Boolean(formik.touched.route && formik.errors.route)}
               />
             </Grid>
           </Grid>
